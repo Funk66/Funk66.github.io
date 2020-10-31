@@ -1,0 +1,17 @@
+{
+  "name": "guirao.net",
+  "version": "1.0.0",
+  "description": "web",
+  "author": "Guillermo Guirao Aguilar",
+  "license": "ISC",
+  "scripts": {
+    "serve": "parcel src/index.pug",
+    "prebuild": "rm -rf dist",
+    "build": "parcel build src/index.pug --no-source-maps --no-content-hash"
+  },
+  "devDependencies": {
+    "parcel": "^1.12.4",
+    "pug": "^3.0.0",
+    "stylus": "^0.54.8"
+  }
+}

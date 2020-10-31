@@ -1,0 +1,65 @@
+body
+  margin 0
+  padding 0
+  height 100vh
+  display flex
+  justify-content center
+  align-items center
+  background-image url("../img/background.png")
+
+@font-face
+  font-family: 'guirao';
+  src: url('../fonts/guirao.eot');
+  src: url('../fonts/guirao.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/guirao.woff') format('woff'),
+       url('../fonts/guirao.ttf') format('truetype'),
+       url('../fonts/guirao.svg#guirao') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+#container
+  perspective 1000px
+
+#container.reversed #card
+  transform rotateX(180deg) scale(1.2)
+  box-shadow 6px -16px 18px rgba(0, 0, 0, 0.6)
+  border-top 2px solid rgba(0, 0, 0, 0.4)
+  border-left 1px solid rgba(0, 0, 0, 0.4)
+  border-right 1px solid rgba(256, 256, 256, 0.8)
+  border-bottom 2px solid rgba(256, 256, 256, 0.8)
+
+#card
+  color #84807f
+  cursor pointer
+  box-shadow 4px 8px 12px rgba(0, 0, 0, 0.6)
+  border-top 2px solid rgba(256, 256, 256, 0.8)
+  border-left 1px solid rgba(256, 256, 256, 0.8)
+  border-right 1px solid rgba(0, 0, 0, 0.4)
+  border-bottom 2px solid rgba(0, 0, 0, 0.4)
+  border-radius 4px
+  font-family "guirao", cursive, sans-serif
+  transition: all 2s ease-in-out
+  transform-style preserve-3d
+  background-image  url("../img/paper.png")
+
+#card, #front, #back
+  width 320px
+  height 160px
+
+#front, #back
+  top 0
+  left 0
+  position absolute
+
+#front
+  z-index 2
+  text-align  center
+  transform rotateX(0deg)
+  backface-visibility hidden
+
+#back
+  transform rotateX(180deg)
+
+#vcard
+  height 100px
+  width 100px
