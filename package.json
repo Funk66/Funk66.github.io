@@ -10,7 +10,7 @@
     "build": "parcel build src/index.pug --no-source-maps --no-content-hash"
   },
   "devDependencies": {
-    "parcel": "^1.12.4",
+    "parcel": "^2.8.2",
     "pug": "^3.0.0",
     "stylus": "^0.54.8"
   }
