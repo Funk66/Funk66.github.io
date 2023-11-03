@@ -1,5 +1,5 @@
 {
-  "name": "guirao.net",
+  "name": "funk66",
   "version": "1.0.0",
   "description": "web",
   "author": "Guillermo Guirao Aguilar",
@@ -10,8 +10,11 @@
     "build": "parcel build src/index.pug --no-source-maps --no-content-hash"
   },
   "devDependencies": {
-    "parcel": "^1.12.4",
-    "pug": "^3.0.0",
-    "stylus": "^0.54.8"
+    "parcel": "^2.10.2",
+    "pug": "^3.0.2",
+    "stylus": "^0.61.0"
+  },
+  "dependencies": {
+    "npm-check-updates": "^16.14.6"
   }
 }
