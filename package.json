@@ -5,13 +5,12 @@
   "author": "Guillermo Guirao Aguilar",
   "license": "ISC",
   "scripts": {
-    "serve": "parcel src/index.pug",
-    "prebuild": "rm -rf dist",
-    "build": "parcel build src/index.pug --no-source-maps --no-content-hash"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
-    "parcel": "^2.12.0",
-    "pug": "^3.0.3",
-    "stylus": "^0.63.0"
+    "stylus": "^0.63.0",
+    "vite": "^5.4.0"
   }
 }

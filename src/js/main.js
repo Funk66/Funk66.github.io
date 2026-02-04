@@ -1,18 +1,20 @@
-var flipping = false;
-var container = null;
+import "../css/main.styl";
 
-window.onload = () => {
+let flipping = false;
+let container = null;
+
+window.addEventListener("load", () => {
   container = document.getElementById("container");
-}
+});
 
-function scroll (event) {
-  var event = event || window.event;
-  var move = event.deltaY || event.detail;
-  console.log(event);
-  if (move && (
-    (move > 0 && container.className == "") ||
-    (move < 0 && container.className == "reversed")
-  )) {
+function scroll(event) {
+  event = event || window.event;
+  const move = event.deltaY || event.detail;
+  if (
+    move &&
+    ((move > 0 && container.className === "") ||
+      (move < 0 && container.className === "reversed"))
+  ) {
     window.flip();
   }
 }
@@ -20,7 +22,7 @@ function scroll (event) {
 if ("onmousewheel" in document) {
   document.onmousewheel = scroll;
 } else {
-  document.addEventListener('DOMMouseScroll', scroll, false);
+  document.addEventListener("DOMMouseScroll", scroll, false);
 }
 
 window.flip = function() {
