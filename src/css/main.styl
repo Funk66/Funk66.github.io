@@ -1,32 +1,22 @@
 body
   margin 0
   padding 0
-  height 100vh
+  min-height 100vh
+  min-height 100svh
   display flex
   justify-content center
   align-items center
   background-image url("/img/background.png")
+  font-family 'Courier New'
 
 @font-face
-  font-family: 'guirao';
-  src: url('/fonts/guirao.eot');
-  src: url('/fonts/guirao.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/guirao.woff') format('woff'),
-       url('/fonts/guirao.ttf') format('truetype'),
-       url('/fonts/guirao.svg#guirao') format('svg');
-  font-weight: normal;
+  font-family: 'modelista';
+  src: url('/fonts/modelista-signature.woff2') format('woff2'),
+       url('/fonts/modelista-signature.woff') format('woff'),
+       url('/fonts/modelista-signature.otf') format('opentype');
+  font-weight: 400;
   font-style: normal;
-
-@font-face
-  font-family: 'icons';
-  src: url('/fonts/icons.eot?28788762');
-  src: url('/fonts/icons.eot?28788762#iefix') format('embedded-opentype'),
-       url('/fonts/icons.woff2?28788762') format('woff2'),
-       url('/fonts/icons.woff?28788762') format('woff'),
-       url('/fonts/icons.ttf?28788762') format('truetype'),
-       url('/fonts/icons.svg?28788762#fontello') format('svg');
-  font-weight: normal;
-  font-style: normal;
+  font-display: swap;
 
 #container
   perspective 1000px
@@ -44,13 +34,34 @@ body
   border-right 1px solid rgba(0, 0, 0, 0.4)
   border-bottom 2px solid rgba(0, 0, 0, 0.4)
   border-radius 4px
-  font-family "guirao", sans-serif
-  transition: all 1s ease-in-out
+
+  h1
+    font-family "modelista", cursive
+    font-size 45px
+    margin 30px 0px 0px 0px
+
+    // Apply different stylistic sets so letters vary between the 2 words
+    .g1, .g2
+      display inline-block
+
+    .g1
+      font-feature-settings "ss01" 1
+
+    .g2
+      font-feature-settings "ss02" 1
+
+  position relative
+  &.ready
+    transition transform 1s ease-in-out, box-shadow 1s ease-in-out, border-top-color 1s ease-in-out, border-bottom-color 1s ease-in-out
+  will-change transform
   transform-style preserve-3d
   background-image url("/img/paper.png")
 
+  p
+    margin 0
+
   h1, p
-    opacity 0.8
+    opacity 0.7
 
 #card, #front, #back
   width 315px
@@ -68,9 +79,18 @@ body
   transform rotateX(0deg)
   backface-visibility hidden
 
+  &:focus-visible
+    outline 2px solid rgba(0, 0, 0, 0.6)
+    outline-offset 4px
+
+  a
+    color inherit
+    text-decoration none
+
 #back
   margin auto
   transform rotateX(180deg)
+  backface-visibility hidden
 
   a
     position absolute
@@ -79,12 +99,6 @@ body
   height 120px
   width 120px
 
-i
-  font-family "icons"
-  font-style normal
-  font-weight normal
-  font-size 48px
-  color black
-  opacity 0.8
-  speak never
-  display inline-block
+@media (prefers-reduced-motion: reduce)
+  #card.ready
+    transition none

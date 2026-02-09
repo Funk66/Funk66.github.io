@@ -12,31 +12,27 @@
   <body>
     <div id="container">
       <div id="card">
-        <div id="front" onclick="flip()">
-          <h1>Guillermo Guirao</h1>
-          <p>+49 178 5378256</p>
-          <p>guillermo@guirao.net</p>
+        <div id="front" role="button" tabindex="0" aria-label="Flip card">
+          <h1>
+            <span class="g2">G</span>uillermo <span class="g1">G</span>uira<span
+              class="g1"
+              >o</span
+            >
+          </h1>
+          <p><a id="email" href="#" aria-label="email address"></a></p>
         </div>
         <div id="back">
-          <a href="mailto:guillermo@guirao.com" style="top: 20px; left: 20px">
-            <i class="icon-email">&#x2709;</i>
-          </a>
-          <a href="/assets/guirao.pgp" style="bottom: 20px; left: 20px">
-            <i class="icon-key">&#x1f511;</i>
-          </a>
-          <a href="/assets/guirao.vcf" style="top: 30px; left: 98px">
-            <img id="vcard" src="/img/mecard.svg" />
-          </a>
-          <a href="https://wa.me/491785378256" style="top: 20px; right: 20px">
-            <i class="icon-whatsapp">&#xf232;</i>
-          </a>
-          <a href="https://t.me/ggaguilar" style="bottom: 20px; right: 20px">
-            <i class="icon-telegram">&#xf2c6;</i>
+          <a
+            href="/assets/guirao.vcf"
+            download="guirao.vcf"
+            aria-label="Download contact vCard"
+            style="top: 30px; left: 98px"
+          >
+            <img id="vcard" src="/img/mecard.svg" alt="Download contact" />
           </a>
         </div>
       </div>
     </div>
-
     <script type="module" src="/src/js/main.js"></script>
   </body>
 </html>
