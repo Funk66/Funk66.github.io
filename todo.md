@@ -1,0 +1,5 @@
+- [ ] Write email to landlord in German about lost key
+    - Context: Lost apartment key, still have second copy.
+    - Request: Ask landlord to request a replacement from building management.
+    - Detail: Mention key is shared (main entrance + apartment) and has duplication protection, so self-duplication is not possible.
+    - Tone: Professional and direct.

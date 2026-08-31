@@ -1,32 +1,38 @@
 import "../css/main.styl";
 
 let flipping = false;
-let container = null;
+let currentAngle = 0;
+let card = null;
+let touchStartY = null;
+
+const TOUCH_THRESHOLD = 30;
+const COOLDOWN = 200;
 
 window.addEventListener("load", () => {
-  container = document.getElementById("container");
+  card = document.getElementById("card");
 
-  const card = document.getElementById("card");
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       card.classList.add("ready");
     });
   });
 
-  const frontEl = document.getElementById("front");
-  if (frontEl) {
-    frontEl.addEventListener("click", (e) => {
-      if (e.target?.closest?.("a")) return;
-      window.flip();
-    });
+  card.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      flip("down");
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      flip("up");
+    }
+  });
 
-    frontEl.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        window.flip();
-      }
-    });
-  }
+  card.addEventListener("animationend", (e) => {
+    if (e.animationName === "flip-shadow") {
+      card.classList.remove("flipping");
+      setTimeout(() => { flipping = false; }, COOLDOWN);
+    }
+  });
 
   const emailEl = document.getElementById("email");
   if (emailEl) {
@@ -43,24 +49,47 @@ window.addEventListener("load", () => {
   }
 });
 
-function scroll(event) {
-  if (!container) return;
-  const move = event?.deltaY || event?.detail;
-  if (
-    move &&
-    ((move > 0 && container.className === "") ||
-      (move < 0 && container.className === "reversed"))
-  ) {
-    window.flip();
+document.addEventListener("wheel", (event) => {
+  if (event.deltaY > 0) {
+    flip("down");
+  } else if (event.deltaY < 0) {
+    flip("up");
   }
+}, { passive: true });
+
+document.addEventListener("touchstart", (e) => {
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+
+document.addEventListener("touchmove", (e) => {
+  if (touchStartY === null) return;
+  const delta = e.touches[0].clientY - touchStartY;
+  if (Math.abs(delta) > TOUCH_THRESHOLD) {
+    if (delta > 0) {
+      flip("down");
+    } else {
+      flip("up");
+    }
+    touchStartY = e.touches[0].clientY;
+    e.preventDefault();
+  }
+}, { passive: false });
+
+document.addEventListener("touchend", () => {
+  touchStartY = null;
+}, { passive: true });
+
+function flip(direction) {
+  if (flipping || !card) return;
+  flipping = true;
+
+  currentAngle += direction === "down" ? 180 : -180;
+  card.style.transform = `rotateX(${currentAngle}deg)`;
+
+  card.classList.remove("flipping");
+  void card.offsetWidth;
+  card.classList.add("flipping");
+  card.classList.toggle("inverted-light");
 }
 
-document.addEventListener("wheel", scroll, { passive: true });
-
-window.flip = function() {
-  if (!flipping) {
-    flipping = true;
-    container.classList.toggle("reversed");
-    setTimeout(() => flipping = false, 1000);
-  }
-}
+window.flip = flip;

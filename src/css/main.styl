@@ -1,8 +1,14 @@
+html
+  height 100vh
+  height 100svh
+  overflow hidden
+
 body
   margin 0
   padding 0
   min-height 100vh
   min-height 100svh
+  overflow hidden
   display flex
   justify-content center
   align-items center
@@ -21,14 +27,8 @@ body
 #container
   perspective 1000px
 
-#container.reversed #card
-  transform rotateX(180deg) scale(1.2)
-  box-shadow 6px -16px 18px rgba(0, 0, 0, 0.6)
-  border-top 2px solid rgba(0, 0, 0, 0.4)
-  border-bottom 2px solid rgba(256, 256, 256, 0.8)
-
 #card
-  box-shadow 4px 8px 12px rgba(0, 0, 0, 0.6)
+  box-shadow 10px 25px 35px rgba(0, 0, 0, 0.35)
   border-top 2px solid rgba(256, 256, 256, 0.8)
   border-left 1px solid rgba(256, 256, 256, 0.8)
   border-right 1px solid rgba(0, 0, 0, 0.4)
@@ -52,7 +52,8 @@ body
 
   position relative
   &.ready
-    transition transform 1s ease-in-out, box-shadow 1s ease-in-out, border-top-color 1s ease-in-out, border-bottom-color 1s ease-in-out
+    transition transform 1s ease-in-out, border-top-color 1s ease-in-out, border-bottom-color 1s ease-in-out
+    animation lift 0.8s ease-out
   will-change transform
   transform-style preserve-3d
   background-image url("/img/paper.png")
@@ -62,6 +63,17 @@ body
 
   h1, p
     opacity 0.7
+
+  &.inverted-light
+    border-top-color rgba(0, 0, 0, 0.4)
+    border-bottom-color rgba(256, 256, 256, 0.8)
+
+  &.flipping
+    animation flip-shadow 1s ease-in-out
+
+  &:focus-visible
+    outline 2px solid rgba(0, 0, 0, 0.6)
+    outline-offset 4px
 
 #card, #front, #back
   width 315px
@@ -74,14 +86,9 @@ body
 
 #front
   z-index 2
-  cursor pointer
   text-align  center
   transform rotateX(0deg)
   backface-visibility hidden
-
-  &:focus-visible
-    outline 2px solid rgba(0, 0, 0, 0.6)
-    outline-offset 4px
 
   a
     color inherit
@@ -99,6 +106,23 @@ body
   height 120px
   width 120px
 
+@keyframes lift
+  0%
+    box-shadow 2px 4px 6px rgba(0, 0, 0, 0.7)
+  100%
+    box-shadow 10px 25px 35px rgba(0, 0, 0, 0.35)
+
+@keyframes flip-shadow
+  0%
+    box-shadow 10px 25px 35px rgba(0, 0, 0, 0.35)
+  50%
+    box-shadow 12px 35px 55px rgba(0, 0, 0, 0.2)
+  100%
+    box-shadow 10px 25px 35px rgba(0, 0, 0, 0.35)
+
 @media (prefers-reduced-motion: reduce)
   #card.ready
     transition none
+    animation none
+  #card.flipping
+    animation none
